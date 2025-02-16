@@ -35,6 +35,7 @@ services:
       - 'N8N_EDITOR_BASE_URL=${SERVICE_FQDN_N8N}'
       - 'WEBHOOK_URL=${SERVICE_FQDN_N8N}'
       - 'N8N_HOST=${SERVICE_URL_N8N}'
+      - 'N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true'
       - 'GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-Europe/Berlin}'
       - 'TZ=${TZ:-Europe/Berlin}'
       - DB_TYPE=postgresdb
