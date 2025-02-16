@@ -37,10 +37,14 @@ services:
       - DB_POSTGRESDB_USER=${SERVICE_USER_POSTGRES}
       - DB_POSTGRESDB_PASSWORD=${SERVICE_PASSWORD_POSTGRES}
     volumes:
-      - './import:/data/import'
+      - './n8n/backup:/backup'
     depends_on:
       postgres:
         condition: service_healthy
+        entrypoint: /bin/sh
+    command:
+      - "-c"
+      - "n8n import:credentials --separate --input=/backup/credentials && n8n import:workflow --separate --input=/backup/workflows"
     healthcheck:
       test:
         - CMD-SHELL
