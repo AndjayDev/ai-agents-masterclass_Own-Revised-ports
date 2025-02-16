@@ -101,11 +101,24 @@ services:
       - 'DISABLE_FLOWISE_TELEMETRY=${DISABLE_FLOWISE_TELEMETRY:-true}'
       - 'PORT=${PORT:-3001}'
       - DATABASE_PATH=/root/.flowise/db.sqlite3
+      - APIKEY_PATH=/root/.flowise
+      - SECRETKEY_PATH=/root/.flowise
+      - LOG_PATH=/root/.flowise/logs
+      - BLOB_STORAGE_PATH=/root/.flowise/storage
+      - 'FLOWISE_USERNAME=${SERVICE_USER_FLOWISE}' # Username for Flowise authentication
+      - 'FLOWISE_PASSWORD=${SERVICE_PASSWORD_FLOWISE}' # Password for Flowise authentication
     volumes:
-      - flowise_data:/root/.flowise/
+      - flowise_data:/root/.flowise/  
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'wget -qO- http://127.0.0.1:3001 || exit 1'
+      interval: 5s
+      timeout: 5s
+      retries: 3
 
   qdrant:
     image: qdrant/qdrant:latest
