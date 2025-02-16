@@ -22,7 +22,7 @@ services:
       interval: 5s
       timeout: 20s
       retries: 10
-      
+
   n8n-import:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8n-import
@@ -60,7 +60,7 @@ services:
     ports:
       - "5680:5678"
     environment:
-      - SERVICE_FQDN_N8N_5678
+      - SERVICE_FQDN_N8N_5680
       - 'N8N_EDITOR_BASE_URL=${SERVICE_FQDN_N8N}'
       - 'WEBHOOK_URL=${SERVICE_FQDN_N8N}'
       - 'N8N_HOST=${SERVICE_URL_N8N}'
@@ -94,7 +94,7 @@ services:
     ports:
       - "3003:3001"
     environment:
-      - SERVICE_FQDN_FLOWISE_3001
+      - SERVICE_FQDN_FLOWISE_3003
       - 'DEBUG=${DEBUG:-false}'
       - 'DISABLE_FLOWISE_TELEMETRY=${DISABLE_FLOWISE_TELEMETRY:-true}'
       - 'PORT=${PORT:-3001}'
@@ -114,7 +114,7 @@ services:
     ports:
       - "6335:6333"
     environment:
-      - SERVICE_FQDN_QDRANT_6333
+      - SERVICE_FQDN_QDRANT_6335
       - 'QDRANT__SERVICE__API_KEY=${SERVICE_PASSWORD_QDRANTAPIKEY}'
     volumes:
       - qdrant_storage:/qdrant/storage
