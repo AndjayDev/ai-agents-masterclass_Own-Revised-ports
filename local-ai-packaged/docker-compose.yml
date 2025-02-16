@@ -21,37 +21,6 @@ services:
       timeout: 20s
       retries: 10
 
-  n8n-import:
-    image: docker.n8n.io/n8nio/n8n
-    container_name: n8n-import
-    networks:
-      - demo
-    environment:
-      - SERVICE_FQDN_N8N_IMPORT
-      - 'N8N_HOST=${SERVICE_URL_N8N}'
-      - 'N8N_IMPORT_EXPORT_MODE=import'
-      - 'N8N_IMPORT_DIR=/data/import'
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - 'DB_POSTGRESDB_USER=${SERVICE_USER_POSTGRES}'
-      - 'DB_POSTGRESDB_PASSWORD=${SERVICE_PASSWORD_POSTGRES}'
-    volumes:
-      - './n8n/backup:/backup'
-    depends_on:
-      postgres:
-        condition: service_healthy
-        entrypoint: /bin/sh
-    command:
-      - "-c"
-      - "n8n import:credentials --separate --input=/backup/credentials && n8n import:workflow --separate --input=/backup/workflows"
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - '[ "$(ls -A /data/import)" ] || exit 1'
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   n8n:
     image: docker.n8n.io/n8nio/n8n
