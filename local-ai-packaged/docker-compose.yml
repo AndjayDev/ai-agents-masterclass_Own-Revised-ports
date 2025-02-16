@@ -100,13 +100,13 @@ services:
       - 'DEBUG=${DEBUG:-false}'
       - 'DISABLE_FLOWISE_TELEMETRY=${DISABLE_FLOWISE_TELEMETRY:-true}'
       - 'PORT=${PORT:-3001}'
-      - DATABASE_PATH=/root/.flowise/db.sqlite3
+      - DATABASE_PATH=/root/.flowise
       - APIKEY_PATH=/root/.flowise
       - SECRETKEY_PATH=/root/.flowise
       - LOG_PATH=/root/.flowise/logs
       - BLOB_STORAGE_PATH=/root/.flowise/storage
-      - 'FLOWISE_USERNAME=${SERVICE_USER_FLOWISE}' # Username for Flowise authentication
-      - 'FLOWISE_PASSWORD=${SERVICE_PASSWORD_FLOWISE}' # Password for Flowise authentication
+      - 'FLOWISE_USERNAME=${SERVICE_USER_FLOWISE}'
+      - 'FLOWISE_PASSWORD=${SERVICE_PASSWORD_FLOWISE}'
     volumes:
       - flowise_data:/root/.flowise/  
     depends_on:
