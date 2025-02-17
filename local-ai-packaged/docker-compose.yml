@@ -38,7 +38,6 @@ services:
       - 'GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-Europe/Berlin}'
       - 'TZ=${TZ:-Europe/Berlin}'
       - DB_TYPE=postgresdb
-      - 'POSTGRES_DB=${POSTGRES_DB:-n8n}'
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
       - 'DB_POSTGRESDB_USER=$SERVICE_USER_POSTGRES'
